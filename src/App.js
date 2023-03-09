@@ -49,12 +49,26 @@ const Scene = () => {
   return <primitive object={obj} scale={0.4} position={[-5, 0, 0]}/>;
 };
 
+/*
 const Text = () =>(
   <div className="overlaytext">Hi Jacquiiii
   how are you today</div>
  
 )
+*/
 
+const height = "10%";
+const max = 50;
+const min = 0;
+const ecvalue = 25;
+const uncertainty = 10;
+const real_max = 500;
+const real_ecvalue = (ecvalue / max)*real_max;
+const real_uncertainty = (uncertainty / max)*real_max;
+const real_margin = real_ecvalue - (0.5* real_max);
+const aa = `${real_margin*2}px`
+const bb = `${real_uncertainty*2}px`
+//const bb= "240px";
 
 
 class App extends Component {
@@ -102,32 +116,33 @@ class App extends Component {
         document.getElementById("demo").innerHTML = "Embodied carbon: undetermined";
       }
       event.preventDefault();
+
+      document.getElementById("myRange").style.width=bb;
+      document.getElementById("myRange").style.marginLeft= aa;
     }
 
     render() {
 
         console.log(this.state.apiResponse);
         return (
-            <div className="App">
-                <p className="App-intro">{this.state.apiResponse}</p>
-                            
-                <>    
-                <Canvas>
-                <ambientLight intensity={0.1} />
-                <directionalLight color="white" position={[-5, 4, 5]} />
-                <Suspense fallback={null}>
-                    <Scene />
-                    <OrbitControls />
-                    <Environment preset="dawn" background blur={0.5} />
-                </Suspense>
-
-                </Canvas>
-
-                </>
-
-
+           <div className="App">
+              <div class = "lefthalf"> 
+              <>    
+              <Canvas concurrent>
+              <ambientLight intensity={0.1} />
+              <directionalLight color="white" position={[0, 4, 5]} />
+              <Suspense fallback={null}>
+                  <Scene />
+                  <OrbitControls />
+                  <Environment files="./img/kloppenheim.hdr" background blur={0.5} />
+              </Suspense>
+              </Canvas>
+              </>
+              </div>
+              <div class = "righthalf">
+                <h1>title</h1>
                 <div>
-                <form onSubmit={this.handleSubmit}>
+                  <form onSubmit={this.handleSubmit}>
                     <label>
                     Choose structural system: 
                     <select value={this.state.value} onChange={this.handleChange}>
@@ -141,6 +156,29 @@ class App extends Component {
                 </form>
                 <p id="demo">Embodied carbon:</p>
                 </div>
+                <p>Custom range slider:</p>
+                <div class = "container_row">
+                  <div class="layer1">
+                    <div class="slidecontainer" id ="slider1" >
+                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange"/>
+                    </div>  
+                  </div>
+                  <div class = "layer2">
+                    <svg class = "rect" width="500px" height="20">
+                    <rect  width="100%" height= "100%"/>
+                    </svg>
+                  </div>
+
+
+                </div>
+
+                  </div>
+             
+
+
+
+
+                
             </div>
 
         );
