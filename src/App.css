@@ -13,7 +13,7 @@
 .righthalf{
 
   color: #312d2d;
-  grid-column: 12;
+  grid-column: 11;
   grid-row: 1;
   z-index: 1;
 }
@@ -99,7 +99,27 @@
 
 .rect {
   border-radius: 5px;
-fill: #d3d3d3;
+  fill: #d3d3d3;
+}
+
+.scale_left{
+  position: relative;
+  text-align: left;
+  grid-column: 1;
+  grid-row: 2;
+
+}
+.scale_middle{
+  position: relative;
+  text-align: left;
+  grid-column: 1;
+  grid-row: 2;
+}
+.scale_right{
+  position: relative;
+  text-align: right;
+  grid-column: 1;
+  grid-row: 2;
 }
 
 .slider {
