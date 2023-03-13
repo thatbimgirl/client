@@ -33,7 +33,8 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { DDSLoader } from "three-stdlib";
 import { Suspense } from "react";
-
+import "./Form.js";
+import Form from "./Form.js";
 
 
 THREE.DefaultLoadingManager.addHandler(/\.dds$/i, new DDSLoader());
@@ -138,7 +139,7 @@ class App extends Component {
 
 
     render() {
-      const b = "hello";
+
         console.log(this.state.apiResponse);
         return (
            <div className="App">
@@ -156,9 +157,11 @@ class App extends Component {
               </>
               </div>
               <div class = "righthalf">
+                <Form /> 
+                <Form />
                 <h1>title</h1>
                 <div>
-                  <form onSubmit={this.handleSubmit}>
+                  <form class= "dropdown"onSubmit={this.handleSubmit}>
                     <label>
                     Choose structural system: 
                     <select value={this.state.value} onChange={this.handleChange}>
@@ -170,6 +173,19 @@ class App extends Component {
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
+                <form onSubmit={this.handleSubmit}>
+                <label>
+                    Choose structural system: 
+                    <select value={this.state.value} onChange={this.handleChange}>
+                        <option value="concrete">Reinforced Concrete</option>
+                        <option value="steel">Steel system</option>
+                        <option value="wood">Wood frame</option>
+                        <option value="masonry">Masonry</option>
+                    </select>
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+
                 <p id="demo">Embodied carbon:</p>
                 </div>
 
@@ -190,13 +206,15 @@ class App extends Component {
                   <text class = "scale_middle" id = "middle">0</text>
                   <text class = "scale_middle" id = "standard">0</text>
                   <text class = "scale_right" id="right">0</text>
-
-
-
                 </div>
+
 
                   </div>
              
+                  <button class="circle-btn"  >
+                    <span>+</span>
+                    <span class="hover-text">Add Option</span>
+                  </button>
 
 
 
