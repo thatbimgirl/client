@@ -25,6 +25,7 @@ import React, { Component } from "react";
 //import logo from "./logo.svg";
 import "./App.css";
 
+const xx = "50px";
 
 class Form extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Form extends Component {
       this.state = { value: 'concrete'};
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this); 
+      
   }
 
   callAPI() {
@@ -47,26 +49,28 @@ class Form extends Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
+
   }
 
   handleSubmit(event) {
     //alert('A name was submitted: ' + this.state.value);
     var footprint_from_api = this.state.apiResponse;
+    var material = this.state.value;
     footprint_from_api= footprint_from_api.substring(1, footprint_from_api.length-1)
-    if (this.state.value === 'concrete'){
+    if (material === 'concrete'){
       var embodied_carbon = footprint_from_api * 0.5;
       var uncertainty = 12;
       document.getElementById("demo").innerHTML = "Embodied carbon: " + embodied_carbon + " t CO2e";
-    } else if (this.state.value === 'steel'){
+    } else if (material === 'steel'){
       embodied_carbon = footprint_from_api * 0.4;
       uncertainty = 5;
       document.getElementById("demo").innerHTML = "Embodied carbon: " + embodied_carbon + " t CO2e";
-    } else if (this.state.value === 'wood'){
+    } else if (material === 'wood'){
       embodied_carbon = footprint_from_api * 0.1;
       uncertainty = 3;
       document.getElementById("demo").innerHTML = "Embodied carbon: " + embodied_carbon + " t CO2e";
     }
-    else if (this.state.value === 'masonry'){
+    else if (material === 'masonry'){
       embodied_carbon = footprint_from_api * 0.3;
       uncertainty = 2;
       document.getElementById("demo").innerHTML = "Embodied carbon: " + embodied_carbon + " t CO2e";
@@ -105,15 +109,15 @@ class Form extends Component {
 
   render() {
 
-      console.log(this.state.apiResponse);
+      const material = this.state.value;
       return (
             <div>
-              <h1>title</h1>
+              <h1>{this.props.title}</h1>
               <div>
                 <form class= "dropdown"onSubmit={this.handleSubmit}>
                   <label>
                   Choose structural system: 
-                  <select value={this.state.value} onChange={this.handleChange}>
+                  <select value= {material} onChange={this.handleChange}>
                       <option value="concrete">Reinforced Concrete</option>
                       <option value="steel">Steel system</option>
                       <option value="wood">Wood frame</option>
@@ -122,18 +126,7 @@ class Form extends Component {
                   </label>
                   <input type="submit" value="Submit" />
               </form>
-              <form onSubmit={this.handleSubmit}>
-              <label>
-                  Choose structural system: 
-                  <select value={this.state.value} onChange={this.handleChange}>
-                      <option value="concrete">Reinforced Concrete</option>
-                      <option value="steel">Steel system</option>
-                      <option value="wood">Wood frame</option>
-                      <option value="masonry">Masonry</option>
-                  </select>
-                  </label>
-                  <input type="submit" value="Submit" />
-              </form>
+
 
               <p id="demo">Embodied carbon:</p>
               </div>
@@ -156,7 +149,7 @@ class Form extends Component {
                 <text class = "scale_middle" id = "standard">0</text>
                 <text class = "scale_right" id="right">0</text>
               </div>
-              
+
           </div>
 
       );
