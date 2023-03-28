@@ -20,6 +20,7 @@
 }
 
 
+
 .circle-btn {
   background-color: #eaff0068; /* Set the background color */
   color: #fff; /* Set the text color */
@@ -30,12 +31,11 @@
   font-size: 24px; /* Set the font size */
   cursor: pointer; /* Change the cursor to a pointer on hover */
   display: flex; /* Use flexbox to center the content */
-  position: relative;
-  justify-self: center;
+  position:relative;
+  left: 240px;
   top: 50px ;
-  z-index: 1;
-  grid-column: 11;
-  grid-row: 2;
+
+
 }
 
 .circle-btn span {
@@ -59,11 +59,44 @@
   opacity: 1; /* Show the text on hover */
 }
 
-.secondForm {
+.firstButton{
   grid-column: 11;
   grid-row: 2;
   z-index: 1;
 }
+.secondForm {
+  grid-column: 11;
+  grid-row: 2;
+  z-index: -2;
+}
+
+.secondButton {
+  grid-column: 11;
+  grid-row: 3;
+  z-index: -2;
+}
+.thirdForm {
+  grid-column: 11;
+  grid-row: 3;
+  z-index: -2;
+}
+
+select {
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  margin-left: 5px;
+  font-family: Arial, sans-serif;
+}
+
+input {
+  border: none;
+  border-radius: 4px;
+  background-color: #ffffff;
+  margin-left: 5px;
+  font-family: Arial, sans-serif;
+}
+
 #canvas{
   position: fixed;
   top: 0;
@@ -164,7 +197,8 @@
   text-align: left;
   grid-column: 1;
   grid-row: 2;
-}
+ }
+
 .scale_right{
   position: relative;
   text-align: right;
@@ -207,3 +241,26 @@
     background: #04AA6D;
     cursor: pointer;
   }
+
+  .standardpointer:hover{
+    fill: red;
+  }
+  .standardpointer:hover text{
+    display: block;
+  }
+
+  .standardpointer .hover-text {
+    position: relative;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #333;
+    opacity: 0; /* Hide the text initially */
+    transition: opacity 0.3s ease-in-out; /* Add a transition effect */
+  }
+  
+  .standardpointer:hover .hover-text {
+    opacity: 1; /* Show the text on hover */
+  }
+  

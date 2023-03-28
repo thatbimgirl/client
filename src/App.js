@@ -24,7 +24,8 @@ import { Suspense } from "react";
 import "./Form.js";
 import Form from "./Form.js";
 import Child from "./Form copy";
-
+import { Button } from "./button";
+import { ListComponent } from "./listcomponent";
 
 
 THREE.DefaultLoadingManager.addHandler(/\.dds$/i, new DDSLoader());
@@ -48,6 +49,7 @@ class App extends Component {
 
     }
 
+
 /*
 
     callAPI() {
@@ -65,8 +67,17 @@ class App extends Component {
 
 
     render() {
-      function myFunction(){
-        document.getElementById("secondElement").innerHTML = "<button />";
+      function firstButton()
+      {
+        document.getElementById("firstButton").style.zIndex = "-2";
+        document.getElementById("secondForm").style.zIndex = "1";
+        document.getElementById("secondButton").style.zIndex = "1";
+      }
+
+      function secondButton()
+      {
+        document.getElementById("secondButton").style.zIndex = "-2";
+        document.getElementById("thirdForm").style.zIndex = "1";
       }
 
         return (
@@ -88,14 +99,31 @@ class App extends Component {
 
               <div class = "righthalf">
                 <Form id="1" title = "Option 1" /> 
-                <Form id ="2" title = "Option 2"/> 
-
               </div>
 
-              <button class="circle-btn" id="plusbuttons" onClick={myFunction}>
+              <div class = "firstButton" id="firstButton">
+                  <button class="circle-btn" id="plusbuttons" onClick={firstButton}>
                     <span id="test">+</span>
                     <span class="hover-text">Add Option</span>
                   </button>
+              </div>
+
+              <div class = "secondForm" id="secondForm">
+              <Form id ="2" title = "Option 2"/>
+              </div>
+
+              <div class = "secondButton" id="secondButton">
+              <button class="circle-btn" id="plusbuttons" onClick={secondButton}>
+                    <span id="test">+</span>
+                    <span class="hover-text">Add Option</span>
+                  </button>
+              </div>
+
+              <div class = "thirdForm" id="thirdForm">
+              <Form id ="3" title = "Option 3"/>
+              </div>
+
+
 
             </div>
 

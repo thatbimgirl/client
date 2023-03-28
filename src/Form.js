@@ -25,12 +25,22 @@ import React, { Component } from "react";
 //import logo from "./logo.svg";
 import "./App.css";
 
-const xx = "50px";
 
 class Form extends Component {
   constructor(props) {
       super(props);
-      this.state = { value: 'concrete'};
+      this.state = { 
+        value: 'concrete',
+        slider_width : 0,
+        slider_offset: 0,
+        min: 0,
+        ecvalue: 0,
+        real_ecvalue: 0,
+        max: 0,
+        standard_ec: 0,
+        real_max: 0,
+        cx: 247.5,
+      };
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this); 
       
@@ -53,30 +63,29 @@ class Form extends Component {
   }
 
   handleSubmit(event) {
-    //alert('A name was submitted: ' + this.state.value);
     var footprint_from_api = this.state.apiResponse;
     var material = this.state.value;
-    footprint_from_api= footprint_from_api.substring(1, footprint_from_api.length-1)
+    footprint_from_api= footprint_from_api.substring(1, footprint_from_api.length-1);
     if (material === 'concrete'){
       var embodied_carbon = footprint_from_api * 0.5;
       var uncertainty = 12;
-      document.getElementById("demo").innerHTML = "Embodied carbon: " + embodied_carbon + " t CO2e";
+      this.setState({ecvalue: embodied_carbon});
     } else if (material === 'steel'){
       embodied_carbon = footprint_from_api * 0.4;
       uncertainty = 5;
-      document.getElementById("demo").innerHTML = "Embodied carbon: " + embodied_carbon + " t CO2e";
+      this.setState({ecvalue: embodied_carbon});
     } else if (material === 'wood'){
       embodied_carbon = footprint_from_api * 0.1;
       uncertainty = 3;
-      document.getElementById("demo").innerHTML = "Embodied carbon: " + embodied_carbon + " t CO2e";
+      this.setState({ecvalue: embodied_carbon});
     }
     else if (material === 'masonry'){
       embodied_carbon = footprint_from_api * 0.3;
       uncertainty = 2;
-      document.getElementById("demo").innerHTML = "Embodied carbon: " + embodied_carbon + " t CO2e";
+      this.setState({ecvalue: embodied_carbon});
     }
     else {
-      document.getElementById("demo").innerHTML = "Embodied carbon: undetermined";
+      this.setState({ecvalue: "undetermined"});
     }
     event.preventDefault();
 
@@ -93,17 +102,19 @@ class Form extends Component {
     const slider_width = `${real_uncertainty*2}px`;
 
 
-    document.getElementById("myRange").style.width=slider_width;
-    document.getElementById("myRange").style.marginLeft= slider_offset;
-    document.getElementById("left").innerHTML = min;
-    document.getElementById("middle").innerHTML = ecvalue;
-    document.getElementById("middle").style.marginLeft = `${real_ecvalue-10}px`;
-    document.getElementById("right").innerHTML = max.toFixed(2);
-    document.getElementById("market_standard_pointer").style.cx = `${standard_ec/max * real_max}`;
-    
-    
+
+    this.setState({slider_width: slider_width});
+    this.setState({slider_offset: slider_offset});
+    this.setState({min: min});
+    this.setState({ecvalue:ecvalue});
+    this.setState({real_ecvalue:real_ecvalue-10+ "px" })
+    this.setState({max: max.toFixed(2)});
+    this.setState({cx:standard_ec/max *real_max })
+
+    /*
     console.log(max, embodied_carbon, slider_offset, slider_width);
     console.log(document.getElementById("myRange").style.width,  document.getElementById("myRange").style.marginLeft)
+    */
   }
 
 
@@ -128,26 +139,27 @@ class Form extends Component {
               </form>
 
 
-              <p id="demo">Embodied carbon:</p>
+              <p id="demo">Embodied carbon: {this.state.ecvalue} t CO2e</p>
               </div>
 
               <div class = "container_row">
                 <div class="layer1">
                   <div class="slidecontainer" id ="slider1" >
-                  <input type="range" min="1" max="100" value="50" class="slider" id="myRange"/>
+                  <input type="range" min="1" max="100" value="50" class="slider" id="myRange" style={{width: this.state.slider_width, marginLeft: this.state.slider_offset}}/>
                   </div>  
                 </div>
                 <div class = "layer2">
                   <svg class = "rect" width="500px" height="20">
                   <rect  width="100%" height= "100%"/>
-                  <circle id="market_standard_pointer"  cx="247.5" cy="10" r="10" fill="hotpink" />
+                  <circle id="market_standard_pointer" class="standardpointer"  style={{cx: this.state.cx}} cy="10" r="10" fill="hotpink"  />
+                  <text class="hover-text">Add Option</text>
                   </svg>
 
                 </div>
-                <text class = "scale_left" id="left" >0</text>
-                <text class = "scale_middle" id = "middle">0</text>
+                <text class = "scale_left" id={this.props.id} >{this.state.min}</text>
+                <text class = "scale_middle" id = "middle" style={{marginLeft:this.state.real_ecvalue}}>{this.state.ecvalue}</text>
                 <text class = "scale_middle" id = "standard">0</text>
-                <text class = "scale_right" id="right">0</text>
+                <text class = "scale_right" id="right">{this.state.max}</text>
               </div>
 
           </div>
