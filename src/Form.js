@@ -24,6 +24,8 @@ export default function App (){
 import React, { Component } from "react";
 //import logo from "./logo.svg";
 import "./App.css";
+import Facade from "./Facade.js";
+import Services from "./Services";
 
 
 class Form extends Component {
@@ -137,6 +139,10 @@ class Form extends Component {
                   </label>
                   <input type="submit" value="Submit" />
               </form>
+              <div>
+              <Facade/>
+              </div>
+              <Services/>
 
 
               <p id="demo">Embodied carbon: {this.state.ecvalue} t CO2e</p>
@@ -151,7 +157,7 @@ class Form extends Component {
                 <div class = "layer2">
                   <svg class = "rect" width="500px" height="20">
                   <rect  width="100%" height= "100%"/>
-                  <circle id="market_standard_pointer" class="standardpointer"  style={{cx: this.state.cx}} cy="10" r="10" fill="hotpink"  />
+                  <circle id="market_standard_pointer" class="standardpointer"  style={{cx: this.state.cx}} cy="10" r="10" fill="rgba(150, 106, 57, 1)"  />
                   <text class="hover-text">Add Option</text>
                   </svg>
 
