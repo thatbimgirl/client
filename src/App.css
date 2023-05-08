@@ -26,9 +26,23 @@ h1, h2, h3, blockquote {
   font-size: x-large;
   font-style: normal;
 }
+h4 {
+  color: #4e505e;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: medium;
+  font-style: bold;
+  padding-bottom: 0px;
+  padding-top: 0px;
+
+}
+.bold{
+  font-weight: 700;
+}
 .refinebutton{
-  color: #4a4f77;
-  background: linear-gradient(109.46deg, rgba(236, 236, 236, 0.87) 1.57%, rgba(150, 106, 57, 0.3) 100%);
+  color: #ffffff;
+  height: 20px;
+  background: linear-gradient(109.46deg, rgba(33, 28, 63, 0.3) 1.57%, rgba(8, 14, 70, 0.411)100%);
   border: 0px solid #a3a3a3;
   backdrop-filter: blur(25px);
 /* Note: backdrop-filter has minimal browser support */
@@ -156,11 +170,6 @@ input {
   padding: 5px;
 
 }
-.label{
-
-  padding-right: 100px;
-  padding-left: 50px;
-}
 
 .App-header {
   background-color: #282c34;
@@ -213,6 +222,10 @@ input {
   border-radius: 5px;
   fill: #d3d3d3;
 }
+.ScoreChart{
+  border-radius: 5px;
+  fill: #d3d3d3;
+}
 
 .scale_left{
   position: relative;
@@ -247,8 +260,28 @@ input {
   -webkit-transition: .2s;
   transition: opacity .2s;
 }
+.imprecision {
+  rx: 5px;
+  fill: #fff47a;
+  outline: none;
+  fill-opacity: 0.7;
 
-  
+}
+
+.scorebackground {
+  rx: 5px;
+  outline: none;
+  fill-opacity: 1;
+
+}
+.marketpointer{
+  fill:  #3e96c9;
+}
+
+.resultpointer{
+  fill:  #71bd4e;
+}
+
   .slider:hover {
     opacity: 1;
   }

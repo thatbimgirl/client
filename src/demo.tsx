@@ -10,6 +10,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { MenuItem } from '@mui/material';
+import "./App.css";
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -35,27 +37,87 @@ export default function TemporaryDrawer() {
       setState({ ...state, [anchor]: open });
     };
 
+
   const list = (anchor: Anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 300 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {['Structure', 'Facade', 'Building services', 'Location'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-          
-        ))}
-        
-      </List>
-      {/* 
 
+      <h1>Benchmarks</h1>
 
+      <div><t class="bold">Life cycle phases (DIN EN 15978) : </t></div>
+      <div><t>A1-3, B4, B6, C3, C4, D </t></div>
+      <div><t class="bold"> Lifetime in years:          </t></div>
+      <div><t> 60      </t></div>
+
+      <h4>Structural Benchmarks</h4>
+      <table width="100%" >
+        <thead>
+          <tr>
+            <th>Structure</th>
+            <th>Min</th>
+            <th>Avg</th>
+            <th>Max</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Solid</td>
+              <td>379.50</td>
+              <td>513.25</td>
+              <td>741.00</td>
+            </tr>
+            <tr>
+              <td>Skeleton</td>
+              <td>431.40</td>
+              <td>583.36</td>
+              <td>844.20</td>
+            </tr>
+            <tr>
+              <td>Wood</td>
+              <td>-69.00</td>
+              <td>162.00</td>
+              <td>382.80</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>Facade Benchmarks</h4>
+    <table width="100%">
+        <thead >
+          <tr>
+            <th>Facade</th>
+            <th>Min</th>
+            <th>Avg</th>
+            <th>Max</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Full Glazing</td>
+              <td>290.50</td>
+              <td>385.00</td>
+              <td>493.00</td>
+            </tr>
+            <tr>
+              <td>Half Glazing</td>
+              <td>169.50</td>
+              <td>236.43</td>
+              <td>297.00</td>
+            </tr>
+            <tr>
+              <td>Solid Wall</td>
+              <td>81.64</td>
+              <td>92.02</td>
+              <td>108.00</td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+{/*
       <Divider />
       <List>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
@@ -69,7 +131,7 @@ export default function TemporaryDrawer() {
           </ListItem>
         ))}
       </List>
-      */}
+     */} 
     </Box>
   );
 
